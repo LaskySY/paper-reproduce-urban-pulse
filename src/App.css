@@ -1,0 +1,48 @@
+/* body {
+  background-color: gainsboro;
+} */
+.App{
+  display: flex;
+  flex-direction: column;
+}
+.banner {
+  width: 96vw;
+  height: 30px;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+}
+.map-container{
+  display: flex;
+  flex-direction: column;
+}
+.map {
+  width:38vw;
+  height:45vh;
+  margin: 2px;
+  position: relative;
+}
+.vis {
+  display: flex;
+  flex-direction: column;
+}
+.scatterplot-container{
+  display: flex;
+  flex-direction: row;
+}
+.scatter1 {
+  width: 20vw;
+  height:30vh;
+  margin: 2px;
+}
+.scatter2 {
+  width: 40vw;
+  height:30vh;
+  margin: 2px;
+}
+.pulse {
+  width: 60vw;
+  height:60vh;
+  margin: 2px;
+}
