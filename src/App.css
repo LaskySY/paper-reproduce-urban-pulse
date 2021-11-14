@@ -1,13 +1,10 @@
-/* body {
-  background-color: gainsboro;
-} */
 .App{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 .banner {
-  width: 96vw;
-  height: 30px;
+  width: 8vw;
+  height: 96vh;
 }
 .content {
   display: flex;
@@ -19,7 +16,7 @@
 }
 .map {
   width:38vw;
-  height:45vh;
+  height:48vh;
   margin: 2px;
   position: relative;
 }
@@ -33,16 +30,16 @@
 }
 .scatter1 {
   width: 20vw;
-  height:30vh;
+  height: 36vh;
   margin: 2px;
 }
 .scatter2 {
-  width: 40vw;
-  height:30vh;
+  width: 30vw;
+  height:36vh;
   margin: 2px;
 }
 .pulse {
-  width: 60vw;
+  width: 50vw;
   height:60vh;
   margin: 2px;
 }
