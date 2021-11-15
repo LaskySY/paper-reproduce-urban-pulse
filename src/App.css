@@ -1,10 +1,11 @@
 .App{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .banner {
-  width: 8vw;
-  height: 96vh;
+  width: 96vw;
+  height: 7vh;
+  margin-bottom: 2px;
 }
 .content {
   display: flex;
@@ -15,8 +16,8 @@
   flex-direction: column;
 }
 .map {
-  width:38vw;
-  height:48vh;
+  width:32vw;
+  height:44vh;
   margin: 2px;
   position: relative;
 }
@@ -29,17 +30,17 @@
   flex-direction: row;
 }
 .scatter1 {
-  width: 20vw;
+  width: 23vw;
   height: 36vh;
   margin: 2px;
 }
 .scatter2 {
-  width: 30vw;
+  width: 40vw;
   height:36vh;
   margin: 2px;
 }
 .pulse {
-  width: 50vw;
-  height:60vh;
+  width: 64vw;
+  height:52vh;
   margin: 2px;
 }
