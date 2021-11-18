@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TIME_MAPPING } from '../constant'
 
 const statusSlice = createSlice({
   name: "status",
   initialState: {
     type: 'HOUR',
-    isLoading: true,
-    range: TIME_MAPPING['HOUR']
+    date: 0
   },
   reducers: {
-    setType: (state, action) => {state.type = action.payload},
-    setRange: (state, action) => {state.range = action.payload},
-    finishLoading: state => {state.isLoading = false}
+    setType: (state, action) => { state.type = action.payload },
+    setDate: (state, action) => { state.date = action.payload },
   },
 });
 
-export const { setType, setRange, finishLoading } = statusSlice.actions
+export const {
+  setType,
+  setDate
+} = statusSlice.actions
 
 export default statusSlice.reducer

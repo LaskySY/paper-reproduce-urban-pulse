@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -6,22 +6,23 @@ import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 
 import { getSliderMarks } from './util.js'
-import { TIME_MAPPING } from './constant'
-import { setType, setRange } from './store/statusSlicer'
+import { TIME_RANGE_MAPPING } from './constant'
+import { setType, setDate } from '../store/statusSlicer'
 
 
 const Banner = () => {
   const dispatch = useDispatch()
   const status = useSelector(state => state.status)
-  // const [sliderRange, setSliderRange] = useState(status.range)
+  const [sliderDate, setSliderDate] = useState(status.date)
 
-  // const handleRangeChange = sliderRange => {
-  //   dispatch(setRange(sliderRange))
-  // }
+  const handleDateChange = sliderDate => {
+    dispatch(setDate(sliderDate))
+  }
 
   const handleTimeFormatChange = newType => {
     if (newType === status.type || newType === null) return
-    // dispatch(setRange(TIME_MAPPING[newType]))
+    dispatch(setDate(0))
+    setSliderDate(0)
     dispatch(setType(newType))
   }
 
@@ -31,16 +32,16 @@ const Banner = () => {
       alignItems="baseline"
       spacing={4}
     >
-      {/* <Slider
+      <Slider
         color="primary"
-        value={sliderRange}
-        onChange={(_, v) => setSliderRange(v)}
-        onChangeCommitted={(_, v) => handleRangeChange(v)}
+        value={sliderDate}
+        onChange={(_, v) => setSliderDate(v)}
+        onChangeCommitted={(_, v) => handleDateChange(v)}
         step={1}
         marks={getSliderMarks(status.type)}
-        min={TIME_MAPPING[status.type][0]}
-        max={TIME_MAPPING[status.type][1]}
-      /> */}
+        min={TIME_RANGE_MAPPING[status.type].min}
+        max={TIME_RANGE_MAPPING[status.type].max}
+      />
       <ToggleButtonGroup
         sx={{ width: '500px' }}
         fullWidth={true}
