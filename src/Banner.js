@@ -1,30 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
-import { getMarks } from './util.js'
+
+import { getSliderMarks } from './util.js'
+import { TIME_MAPPING } from './constant'
+import { setType, setRange } from './store/statusSlicer'
 
 
-const timeExtent = {
-  'HOUR': [0, 23],
-  'DAYOFWEEK': [1, 7],
-  'MONTH': [1, 12]
-}
-const Banner = ({ reformData }) => {
-  const [timeRange, setTimeRange] = useState([6,18])
-  const [timeFormat, setTimeFormat] = useState('HOUR')
-  
-  const handleTimeRangeChange = newTimeRange => {
-    if (newTimeRange === timeRange) return
-    reformData(timeFormat, newTimeRange)
-  }
+const Banner = () => {
+  const dispatch = useDispatch()
+  const status = useSelector(state => state.status)
+  // const [sliderRange, setSliderRange] = useState(status.range)
 
-  const handleTimeFormatChange = newTimeFormat => {
-    if (newTimeFormat === timeFormat || newTimeFormat === null) return
-    setTimeRange(timeExtent[newTimeFormat])
-    setTimeFormat(newTimeFormat)
-    reformData(newTimeFormat, timeRange)
+  // const handleRangeChange = sliderRange => {
+  //   dispatch(setRange(sliderRange))
+  // }
+
+  const handleTimeFormatChange = newType => {
+    if (newType === status.type || newType === null) return
+    // dispatch(setRange(TIME_MAPPING[newType]))
+    dispatch(setType(newType))
   }
 
   return (
@@ -33,31 +31,30 @@ const Banner = ({ reformData }) => {
       alignItems="baseline"
       spacing={4}
     >
-      <Slider
+      {/* <Slider
         color="primary"
-        value={timeRange}
-        onChange={(_, v) => setTimeRange(v)}
-        onChangeCommitted={(_, v) => handleTimeRangeChange(v)}
+        value={sliderRange}
+        onChange={(_, v) => setSliderRange(v)}
+        onChangeCommitted={(_, v) => handleRangeChange(v)}
         step={1}
-        marks={getMarks(timeFormat)}
-        min={timeExtent[timeFormat][0]}
-        max={timeExtent[timeFormat][1]}
-      />
+        marks={getSliderMarks(status.type)}
+        min={TIME_MAPPING[status.type][0]}
+        max={TIME_MAPPING[status.type][1]}
+      /> */}
       <ToggleButtonGroup
         sx={{ width: '500px' }}
         fullWidth={true}
         exclusive
         size="small"
         color="primary"
-        value={timeFormat}
+        value={status.type}
         onChange={(_, v) => handleTimeFormatChange(v)}
       >
-        
         <ToggleButton value="HOUR">Hour</ToggleButton>
         <ToggleButton value="DAYOFWEEK">Day of Week</ToggleButton>
         <ToggleButton value="MONTH">Month</ToggleButton>
       </ToggleButtonGroup>
-      
+
     </Stack>
   )
 }
