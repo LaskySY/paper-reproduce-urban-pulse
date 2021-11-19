@@ -4,33 +4,25 @@ import { StaticMap } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { HeatmapLayer } from '@deck.gl/aggregation-layers';
 import { ScatterplotLayer } from '@deck.gl/layers';
-import * as d3 from 'd3'
 
 import { MAP_STYLE, MAPBOX_TOKEN, INITIAL_LOCATION } from './constant'
-import nycCSV from '../data/flickr_nyc.csv'
-import sfCSV from '../data/flickr_sf.csv'
 
-var scalarData = []
 
-const Map = ({ location }) => {
-  const scatterData = useSelector(state => state.data[location])
-  const [isCSVLoading, setIsCSVLoading] = useState(true)
-
-  useEffect(() => {
-    let csvCallback = d => [+d.Longtitude, +d.Latitude]
-    let data = location === 'nyc' ? nycCSV : sfCSV
-    d3.csv(data, csvCallback).then(d => {
-      scalarData = d
-      setIsCSVLoading(false)
-    })
-  }, [])
+const Map = ({ location, scalarData }) => {
+  const mode = useSelector(state => state.status.mode)
+  const highLightList = useSelector(state => state.data[location + 'Highlight'])
+  const scatterData = useSelector(state => {
+    let data = state.data[location]
+    return mode === 'normal'
+      ? data
+      : data.filter((_, i) => highLightList.includes(i))
+  })
 
   const INITIAL_VIEW_STATE = {
     longitude: INITIAL_LOCATION[location].longtitude,
     latitude: INITIAL_LOCATION[location].latitude,
     zoom: 10,
   };
-
 
   const layers = [
     new HeatmapLayer({
@@ -59,7 +51,6 @@ const Map = ({ location }) => {
   ];
 
   return (
-    !isCSVLoading &&
     <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={layers}>
       <StaticMap reuseMaps mapboxApiAccessToken={MAPBOX_TOKEN} mapStyle={MAP_STYLE} preventStyleDiffing={true} />
     </DeckGL>
