@@ -1,46 +1,55 @@
-.App{
-  display: flex;
-  flex-direction: column;
+html, body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
-.banner {
-  width: 96vw;
-  height: 7vh;
-  margin-bottom: 2px;
+.App {
+  width: 100%;
+  height: 100%
 }
-.content {
-  display: flex;
-  flex-direction: row;
+.banner_container {
+  position: fixed;
+  left: 2%;
+  width: 96%;;
+  height: 40px;
 }
-.map-container{
-  display: flex;
-  flex-direction: column;
+.map_container {
+  position: fixed;
+  width: 35%;;
+  height: calc(50% - 20px);
 }
-.map {
-  width:32vw;
-  height:44vh;
-  margin: 2px;
-  position: relative;
+.map_container_1 {
+  top: 40px;
 }
-.vis {
-  display: flex;
-  flex-direction: column;
+.map_container_2 {
+  bottom: 0px;
 }
-.scatterplot-container{
-  display: flex;
-  flex-direction: row;
+.scatter_container {
+  position: fixed;
+  top: 40px;
+  height: 250px;
 }
-.scatter1 {
-  width: 23vw;
-  height: 36vh;
-  margin: 2px;
+.scatter_container_1 {
+  left: 35%;
+  width: 300px;
 }
-.scatter2 {
-  width: 40vw;
-  height:36vh;
-  margin: 2px;
+.scatter_container_2 {
+  right: 0;
+  width: calc(65% - 300px);
+  background-color: lightskyblue;
 }
-.pulse {
-  width: 64vw;
-  height:52vh;
-  margin: 2px;
+.pulsechart_container {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 65%;
+  height: calc(100% - 290px);
+  background-color: lightcoral;
+}
+
+.MuiToggleButton-root {
+  padding: 4px !important;
+}
+.MuiSlider-markLabel {
+  top: 20px !important;
 }

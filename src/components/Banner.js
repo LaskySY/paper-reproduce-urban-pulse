@@ -35,6 +35,7 @@ const Banner = () => {
       <Slider
         color="primary"
         track={false}
+        size={'small'}
         value={sliderDate}
         onChange={(_, v) => setSliderDate(v)}
         onChangeCommitted={(_, v) => handleDateChange(v)}

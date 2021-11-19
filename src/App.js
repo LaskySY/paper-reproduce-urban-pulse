@@ -11,31 +11,23 @@ function App() {
 
   return (
     <div className="App">
-      <div className='banner'>
+      <div className='banner_container'>
         <Banner />
       </div>
-      <div className="content">
-        <div className="map-container">
-          <div className='map'>
-            <Map location='nyc' />
-          </div>
-          <div className='map'>
-            <Map location='sf' />
-          </div>
-        </div>
-        <div className='vis'>
-          <div className="scatterplot-container">
-            <div className='scatter1'>
-              <Scatterplot />
-            </div>
-            <div className='scatter2'>
-              scatter 2
-            </div>
-          </div>
-          <div className="pulse">
-            <PulseChart/>
-          </div>
-        </div>
+      <div className='map_container map_container_1'>
+        <Map location='nyc' />
+      </div>
+      <div className='map_container map_container_2'>
+        <Map location='sf' />
+      </div>
+      <div className='scatter_container scatter_container_1'>
+        <Scatterplot />
+      </div>
+      <div className='scatter_container scatter_container_2'>
+
+      </div>
+      <div className="pulsechart_container">
+        <PulseChart/>
       </div>
     </div>
   );
