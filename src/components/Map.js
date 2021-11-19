@@ -6,14 +6,21 @@ import { HeatmapLayer } from '@deck.gl/aggregation-layers';
 import { ScatterplotLayer } from '@deck.gl/layers';
 import * as d3 from 'd3'
 
-import { MAP_STYLE, MAPBOX_TOKEN, INITIAL_LOCATION } from './constant'
-import nycCSV from '../data/flickr_nyc.csv'
-import sfCSV from '../data/flickr_sf.csv'
+import { MAP_STYLE, MAPBOX_TOKEN, INITIAL_LOCATION, MODE_MAP } from './constant'
+import nycCSV from '../data/test.csv'
+import sfCSV from '../data/test.csv'
 
 var scalarData = []
 
 const Map = ({ location }) => {
-  const scatterData = useSelector(state => state.data[location])
+  const mode = useSelector(state=> state.status.mode)
+  const highLightList = useSelector(state => state.data[location+'Highlight'])
+  const scatterData = useSelector(state => {
+    let data = state.data[location]
+    return mode === 'normal'
+     ? data
+     : data.filter((_,i)=>highLightList.includes(i))
+  })
   const [isCSVLoading, setIsCSVLoading] = useState(true)
 
   useEffect(() => {
@@ -30,7 +37,6 @@ const Map = ({ location }) => {
     latitude: INITIAL_LOCATION[location].latitude,
     zoom: 10,
   };
-
 
   const layers = [
     new HeatmapLayer({

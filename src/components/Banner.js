@@ -12,15 +12,16 @@ import { setType, setDate } from '../store/statusSlicer'
 
 const Banner = () => {
   const dispatch = useDispatch()
-  const status = useSelector(state => state.status)
-  const [sliderDate, setSliderDate] = useState(status.date)
+  const dateType = useSelector(state => state.status.type)
+  const date = useSelector(state => state.status.date)
+  const [sliderDate, setSliderDate] = useState(date)
 
   const handleDateChange = sliderDate => {
     dispatch(setDate(sliderDate))
   }
 
   const handleTimeFormatChange = newType => {
-    if (newType === status.type || newType === null) return
+    if (newType === dateType || newType === null) return
     dispatch(setDate(0))
     setSliderDate(0)
     dispatch(setType(newType))
@@ -40,9 +41,9 @@ const Banner = () => {
         onChange={(_, v) => setSliderDate(v)}
         onChangeCommitted={(_, v) => handleDateChange(v)}
         step={1}
-        marks={getSliderMarks(status.type)}
-        min={TIME_RANGE_MAPPING[status.type].min}
-        max={TIME_RANGE_MAPPING[status.type].max}
+        marks={getSliderMarks(dateType)}
+        min={TIME_RANGE_MAPPING[dateType].min}
+        max={TIME_RANGE_MAPPING[dateType].max}
       />
       <ToggleButtonGroup
         sx={{ width: '500px' }}
@@ -50,7 +51,7 @@ const Banner = () => {
         exclusive
         size="small"
         color="primary"
-        value={status.type}
+        value={dateType}
         onChange={(_, v) => handleTimeFormatChange(v)}
       >
         <ToggleButton value="HOUR">Hour</ToggleButton>

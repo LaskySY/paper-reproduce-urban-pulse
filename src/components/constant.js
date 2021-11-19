@@ -11,3 +11,8 @@ export const INITIAL_LOCATION = {
   nyc: { longtitude: -73.97963, latitude: 40.730519 },
   sf: { longtitude: -122.43430, latitude: 37.79245 }
 }
+
+export const MODE_MAP = {
+  NORMAL: 'normal',
+  SELECT: 'select'
+}
