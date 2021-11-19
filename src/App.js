@@ -1,7 +1,11 @@
 import React from 'react'
+import './App.css'
+
 import Map from './components/Map'
 import Banner from './components/Banner'
-import './App.css'
+import Scatterplot from './components/Scatterplot';
+import PulseChart from './components/PulseChart';
+
 
 function App() {
 
@@ -22,14 +26,14 @@ function App() {
         <div className='vis'>
           <div className="scatterplot-container">
             <div className='scatter1'>
-              scatter 1
+              <Scatterplot />
             </div>
             <div className='scatter2'>
               scatter 2
             </div>
           </div>
           <div className="pulse">
-            pulse
+            <PulseChart/>
           </div>
         </div>
       </div>
