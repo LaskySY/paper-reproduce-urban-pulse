@@ -17,8 +17,8 @@ function App() {
   const [isCSVLoading, setIsCSVLoading] = useState(true)
   useEffect(() => {
     Promise.all([
-      d3.csv(nycCSV, d => [+d.Longtitude, +d.Latitude]),
-      d3.csv(sfCSV, d => [+d.Longtitude, +d.Latitude])
+      d3.csv(nycCSV, d => [+d.Longtitude, +d.Latitude, +d.Time]),
+      d3.csv(sfCSV, d => [+d.Longtitude, +d.Latitude, +d.Time])
     ]).then(files => {
       nycScalarData = files[0]
       sfScalarData = files[1]

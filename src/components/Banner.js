@@ -5,10 +5,14 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 
-import { getSliderMarks } from './util.js'
-import { TIME_RANGE_MAPPING } from './constant'
+import { TIME_RANGE_MAPPING, DATETYPE_MAPPING } from './constant'
 import { setType, setDate } from '../store/statusSlicer'
 
+const sliderMarks = {
+  [DATETYPE_MAPPING.HOUR]: [...Array(24).keys()],
+  [DATETYPE_MAPPING.DOW]: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  [DATETYPE_MAPPING.MONTH]: ['Jan', 'Fen', "Mar", 'Apr', 'May', 'Jun', 'Jul', 'Aug', "Sep", "Oct", 'Nov', 'Dec']
+}
 
 const Banner = () => {
   const dispatch = useDispatch()
@@ -41,7 +45,7 @@ const Banner = () => {
         onChange={(_, v) => setSliderDate(v)}
         onChangeCommitted={(_, v) => handleDateChange(v)}
         step={1}
-        marks={getSliderMarks(dateType)}
+        marks={sliderMarks[dateType].map((d, i)=>({value: i, label: d}))}
         min={TIME_RANGE_MAPPING[dateType].min}
         max={TIME_RANGE_MAPPING[dateType].max}
       />

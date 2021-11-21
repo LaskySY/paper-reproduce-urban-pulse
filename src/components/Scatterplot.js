@@ -2,7 +2,7 @@ import React from 'react'
 import Plot from 'react-plotly.js';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { MODE_MAP } from './constant';
+import { MODE_MAPPING } from './constant';
 import { setMode } from '../store/statusSlicer'
 import { setHighlight } from '../store/dataSlicer'
 
@@ -31,15 +31,15 @@ const Scatterplot = () => {
     name: "nyc",
     type: 'scatter',
     mode: 'markers',
-    marker: { color: 'red' },
+    marker: {color: 'red'},
   }, {
     ...sfRank,
     name: "sf",
     type: 'scatter',
     mode: 'markers',
-    marker: { color: 'blue' },
+    marker: {color: 'blue'},
   }]
-
+ 
   const config = {
     scrollZoom: true,
     displayModeBar: true,
@@ -58,7 +58,7 @@ const Scatterplot = () => {
   }
 
   const onSelectedHandler = data => {
-    if(!data) return
+    if (!data) return
     let nycHighlight = []
     let sfHighlight = []
 
@@ -67,13 +67,13 @@ const Scatterplot = () => {
         ? nycHighlight.push(d.pointIndex)
         : sfHighlight.push(d.pointIndex)
     })
-    dispatch(setHighlight({nycHighlight,sfHighlight}))
-    dispatch(setMode(MODE_MAP.SELECT))
+    dispatch(setHighlight({ nycHighlight, sfHighlight }))
+    dispatch(setMode(MODE_MAPPING.SELECT))
   }
 
   const onDeselectHandler = () => {
-    dispatch(setMode(MODE_MAP.NORMAL))
-    dispatch(setHighlight({nycHighlight: [],sfHighlight: []}))
+    dispatch(setMode(MODE_MAPPING.NORMAL))
+    dispatch(setHighlight({ nycHighlight: [], sfHighlight: [] }))
   }
   return (
     <Plot
@@ -81,7 +81,7 @@ const Scatterplot = () => {
       layout={layout}
       config={config}
       onSelected={data => onSelectedHandler(data)}
-      onDeselect={()=>onDeselectHandler()}
+      onDeselect={() => onDeselectHandler()}
     />
   );
 }

@@ -12,7 +12,19 @@ export const INITIAL_LOCATION = {
   sf: { longtitude: -122.43430, latitude: 37.79245 }
 }
 
-export const MODE_MAP = {
+export const MODE_MAPPING = {
   NORMAL: 'normal',
   SELECT: 'select'
+}
+
+export const DATETYPE_MAPPING = {
+  HOUR: 'HOUR',
+  DOW: "DAYOFWEEK",
+  MONTH: "MONTH"
+}
+
+export const FEATURE_YRANGE_MAPPING = {
+  HOUR: {range: [0, 1200], tickvals: [0, 500, 1000]},
+  DAYOFWEEK: {range: [0, 3200], tickvals: [1000, 2000, 3000]},
+  MONTH: {range: [0, 2200], tickvals:  [1000, 2000, 3000]}
 }

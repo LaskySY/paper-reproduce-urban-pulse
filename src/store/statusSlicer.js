@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { MODE_MAPPING, DATETYPE_MAPPING } from '../components/constant'
+
 
 const statusSlice = createSlice({
   name: "status",
   initialState: {
-    mode: 'normal',
-    type: 'HOUR',
+    mode: MODE_MAPPING.NORMAL,
+    type: DATETYPE_MAPPING.HOUR,
     date: 0
   },
   reducers: {
