@@ -4,8 +4,8 @@ import { StaticMap } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { HeatmapLayer } from '@deck.gl/aggregation-layers';
 import { ScatterplotLayer } from '@deck.gl/layers';
-
 import { MAP_STYLE, MAPBOX_TOKEN, INITIAL_LOCATION, DATETYPE_MAPPING } from './constant'
+
 
 const getTime = (unixTimestamp, dateType) => {
   const date = new Date(unixTimestamp * 1000)

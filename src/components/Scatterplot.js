@@ -6,6 +6,7 @@ import { MODE_MAPPING } from './constant';
 import { setMode } from '../store/statusSlicer'
 import { setHighlight } from '../store/dataSlicer'
 
+
 const Scatterplot = () => {
   const dispatch = useDispatch()
   const dateType = useSelector(state => state.status.type)
@@ -31,15 +32,15 @@ const Scatterplot = () => {
     name: "nyc",
     type: 'scatter',
     mode: 'markers',
-    marker: {color: 'red'},
+    marker: { color: 'red' },
   }, {
     ...sfRank,
     name: "sf",
     type: 'scatter',
     mode: 'markers',
-    marker: {color: 'blue'},
+    marker: { color: 'blue' },
   }]
- 
+
   const config = {
     scrollZoom: true,
     displayModeBar: true,
@@ -58,7 +59,7 @@ const Scatterplot = () => {
   }
 
   const onSelectedHandler = data => {
-    if (!data) return
+    if(!data) return
     let nycHighlight = []
     let sfHighlight = []
 
