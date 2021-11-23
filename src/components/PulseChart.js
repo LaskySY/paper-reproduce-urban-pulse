@@ -1,7 +1,7 @@
 import React from 'react'
 import Plot from 'react-plotly.js'
 import { useDispatch, useSelector } from 'react-redux'
-// import { setSingleHighlight } from '../store/dataSlicer'
+import { setSingleHighlight } from '../store/dataSlicer'
 import { MODE_MAPPING, FEATURE_YRANGE_MAPPING } from './constant'
 
 const getBeatTypes = (d, dateType) => {
@@ -15,23 +15,19 @@ const getBeatTypes = (d, dateType) => {
   return beats;
 }
 
-const PulseChart = () => {
+const PulseChart = ({nycScatterData, sfScatterData}) => {
   const dispatch = useDispatch()
   const mode = useSelector(state => state.status.mode)
   const dateType = useSelector(state => state.status.type)
-  const nyc = useSelector(state => state.data.nyc)
-  const sf = useSelector(state => state.data.sf)
   const nycHighlight = useSelector(state => state.data.nycHighlight)
   const sfHighlight = useSelector(state => state.data.sfHighlight)
   var data = []
 
   if (mode === MODE_MAPPING.SELECT) {
-    let nycData = nycHighlight.map(d => nyc[d])
-    let sfData = sfHighlight.map(d => sf[d])
-    data = [...nycData, ...sfData]
-  } else {
-    data = [...nyc, ...sf]
+    nycScatterData = nycHighlight.map(d => nycScatterData[d])
+    sfScatterData = sfHighlight.map(d => sfScatterData[d])
   }
+  data = [...nycScatterData, ...sfScatterData]
   data.sort((a, b) => b.rank - a.rank)
 
   
@@ -76,8 +72,8 @@ const PulseChart = () => {
   const createChart = (d, i) => {
     return (
       <div key={i} 
-        // onMouseEnter={() => dispatch(setSingleHighlight(d.key))} 
-        // onMouseLeave={() => dispatch(setSingleHighlight(-1))}
+        onMouseEnter={() => dispatch(setSingleHighlight(d.key))} 
+        onMouseLeave={() => dispatch(setSingleHighlight(-1))}
       >
         <Plot
           data={[{
