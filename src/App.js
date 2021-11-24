@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import * as d3 from 'd3'
+import * as d3 from 'd3-fetch'
 import './App.css'
 
 import nycCSV from './data/flickr_nyc.csv'
@@ -19,17 +19,18 @@ var sfScalarData = []
 function App() {
   const [isCSVLoading, setIsCSVLoading] = useState(true)
   useEffect(() => {
-    nycScatterData = feature_nyc.features.map((d, i) => ({ 
-      ...d, 
+    nycScatterData = feature_nyc.features.map((d, i) => ({
+      ...d,
       latLng: [d.latLng[0][1], d.latLng[0][0]],
-      location: 'nyc', 
+      location: 'nyc',
       key: i
     }))
-    sfScatterData = feature_sf.features.map((d, i) => ({ 
-      ...d, 
+    sfScatterData = feature_sf.features.map((d, i) => ({
+      ...d,
       latLng: [d.latLng[0][1], d.latLng[0][0]],
-      location: 'sf', 
-      key: i + feature_nyc.features.length}))
+      location: 'sf',
+      key: i + feature_nyc.features.length
+    }))
     Promise.all([
       d3.csv(nycCSV, d => [+d.Longtitude, +d.Latitude, +d.Time]),
       d3.csv(sfCSV, d => [+d.Longtitude, +d.Latitude, +d.Time])
@@ -50,16 +51,16 @@ function App() {
         <Map location='nyc' scalarData={nycScalarData} scatterData={nycScatterData} />
       </div>
       <div className='map_container map_container_2'>
-        <Map location='sf' scalarData={sfScalarData} scatterData={sfScatterData}/>
+        <Map location='sf' scalarData={sfScalarData} scatterData={sfScatterData} />
       </div>
       <div className='scatter_container scatter_container_1'>
-        <Scatterplot nycScatterData={nycScatterData} sfScatterData={sfScatterData}/>
+        <Scatterplot nycScatterData={nycScatterData} sfScatterData={sfScatterData} />
       </div>
       <div className='scatter_container scatter_container_2'>
 
       </div>
       <div className="pulsechart_container">
-        <PulseChart nycScatterData={nycScatterData} sfScatterData={sfScatterData}/>
+        <PulseChart nycScatterData={nycScatterData} sfScatterData={sfScatterData} />
       </div>
     </div>
   );
