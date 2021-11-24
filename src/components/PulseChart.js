@@ -1,8 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Plot from 'react-plotly.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSingleHighlight } from '../store/dataSlicer'
 import { MODE_MAPPING, FEATURE_YRANGE_MAPPING, COLOR_PULSE_MAPPING, DATE_MAPPING } from './constant'
+
+const lineFigure = {
+  config: {
+    uirevision: true,
+    staticPlot: true,
+    displayModeBar: false,
+  },
+  layout: {
+    margin: { l: 40, r: 40, b: 10, t: 10 },
+    xaxis: {
+      showgrid: false,
+      showticklabels: false,
+      zeroline: false,
+    }
+  }
+}
+const circleFigure = {
+  config: {
+    uirevision: true,
+    staticPlot: true,
+    displayModeBar: false,
+  },
+  layout: {
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    xaxis: {
+      showgrid: false,
+      showticklabels: false,
+      zeroline: false,
+      fixedrange: true,
+    },
+    yaxis: {
+      showgrid: false,
+      showticklabels: false,
+      zeroline: false,
+      fixedrange: true,
+    }
+  }
+}
 
 const getBeatTypes = (d, dateType) => {
   var beats = [];
@@ -23,6 +61,10 @@ const PulseChart = ({ nycScatterData, sfScatterData }) => {
   const sfHighlight = useSelector(state => state.data.sfHighlight)
   const [rankIndex, setRankIndex] = useState([])
   var data = []
+
+  useEffect(()=>{
+    setRankIndex([])
+  }, [dateType])
 
   if (mode === MODE_MAPPING.SELECT) {
     nycScatterData = nycHighlight.map(d => nycScatterData[d])
@@ -45,46 +87,6 @@ const PulseChart = ({ nycScatterData, sfScatterData }) => {
     })
   }
 
-  const lineFigure = {
-    config: {
-      uirevision: true,
-      staticPlot: true,
-      displayModeBar: false,
-    },
-    layout: {
-      margin: { l: 40, r: 40, b: 10, t: 10 },
-      xaxis: {
-        showgrid: false,
-        showticklabels: false,
-        zeroline: false,
-      },
-      yaxis: {
-        ...FEATURE_YRANGE_MAPPING[dateType]
-      }
-    }
-  }
-  const circleFigure = {
-    config: {
-      uirevision: true,
-      staticPlot: true,
-      displayModeBar: false,
-    },
-    layout: {
-      margin: { l: 0, r: 0, b: 0, t: 0 },
-      xaxis: {
-        showgrid: false,
-        showticklabels: false,
-        zeroline: false,
-        fixedrange: true,
-      },
-      yaxis: {
-        showgrid: false,
-        showticklabels: false,
-        zeroline: false,
-        fixedrange: true,
-      }
-    }
-  }
   const createChart = (d, i) => {
     return (
       <div key={i}
@@ -100,7 +102,11 @@ const PulseChart = ({ nycScatterData, sfScatterData }) => {
             }
           }]}
           config={lineFigure.config}
-          layout={lineFigure.layout}
+          layout={{...lineFigure.layout, 
+            yaxis: {
+              ...FEATURE_YRANGE_MAPPING[dateType]
+            }
+          }}
           useResizeHandler={true}
           style={{ width: "100%", height: "80px" }}
         />
