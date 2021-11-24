@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Plot from 'react-plotly.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSingleHighlight } from '../store/dataSlicer'
-import { MODE_MAPPING, FEATURE_YRANGE_MAPPING, COLOR_PULSE_MAPPING, DATE_MAPPING } from './constant'
+import { MODE_MAPPING, AXES_BY_MODE_MAPPING, COLOR_PULSE_MAPPING, DATE_MAPPING } from './constant'
 
 const lineFigure = {
   config: {
@@ -62,7 +62,7 @@ const PulseChart = ({ nycScatterData, sfScatterData }) => {
   const [rankIndex, setRankIndex] = useState([])
   var data = []
 
-  useEffect(()=>{
+  useEffect(() => {
     setRankIndex([])
   }, [dateType])
 
@@ -102,9 +102,10 @@ const PulseChart = ({ nycScatterData, sfScatterData }) => {
             }
           }]}
           config={lineFigure.config}
-          layout={{...lineFigure.layout, 
+          layout={{
+            ...lineFigure.layout,
             yaxis: {
-              ...FEATURE_YRANGE_MAPPING[dateType]
+              ...AXES_BY_MODE_MAPPING[dateType].pulseChart
             }
           }}
           useResizeHandler={true}

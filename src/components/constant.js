@@ -23,11 +23,25 @@ export const DATETYPE_MAPPING = {
   MONTH: "MONTH"
 }
 
-export const FEATURE_YRANGE_MAPPING = {
-  HOUR: { range: [0, 1200], tickvals: [0, 500, 1000] },
-  DAYOFWEEK: { range: [0, 3200], tickvals: [1000, 2000, 3000] },
-  MONTH: { range: [0, 2200], tickvals: [1000, 2000, 3000] }
+export const AXES_BY_MODE_MAPPING = {
+  HOUR: {
+    scatterChart: { range: [0, 1.6] },
+    pulseChart: { range: [0, 1200], tickvals: [0, 500, 1000] },
+    distanceChart: { range: [-0.1, 7.5], tickvals: [0, 1, 2, 3, 4, 5, 6, 7] }
+  },
+  DAYOFWEEK: {
+    scatterChart: { range: [0, 1.8] },
+    pulseChart: { range: [0, 3200], tickvals: [1000, 2000, 3000] },
+    distanceChart: { range: [-0.1, 4.3], tickvals: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5] }
+  },
+  MONTH: {
+    scatterChart: { range: [0, 1.5] },
+    pulseChart: { range: [0, 2200], tickvals: [1000, 2000, 3000] },
+    distanceChart: { range: [-0.1, 5.3], tickvals: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5] }
+  }
 }
+
+
 
 export const COLOR_PULSE_MAPPING = [
   'rgb(255, 255, 255)',

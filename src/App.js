@@ -10,6 +10,7 @@ import Map from './components/Map'
 import Banner from './components/Banner'
 import Scatterplot from './components/Scatterplot';
 import PulseChart from './components/PulseChart';
+import DistanceChart from './components/DistanceChart'
 
 var nycScatterData = []
 var sfScatterData = []
@@ -53,11 +54,14 @@ function App() {
       <div className='map_container map_container_2'>
         <Map location='sf' scalarData={sfScalarData} scatterData={sfScatterData} />
       </div>
-      <div className='scatter_container scatter_container_1'>
+      <div className='scatter_container'>
         <Scatterplot nycScatterData={nycScatterData} sfScatterData={sfScatterData} />
       </div>
-      <div className='scatter_container scatter_container_2'>
+      <div className="button_container">
 
+      </div>
+      <div className='distance_container'>
+        <DistanceChart nycScatterData={nycScatterData} sfScatterData={sfScatterData}   />
       </div>
       <div className="pulsechart_container">
         <PulseChart nycScatterData={nycScatterData} sfScatterData={sfScatterData} />

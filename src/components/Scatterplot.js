@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Plot from 'react-plotly.js';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { MODE_MAPPING } from './constant';
+import { MODE_MAPPING, AXES_BY_MODE_MAPPING } from './constant';
 import { setMode } from '../store/statusSlicer'
 import { setHighlight } from '../store/dataSlicer'
 
 
-const Scatterplot = ({nycScatterData, sfScatterData}) => {
+const Scatterplot = ({ nycScatterData, sfScatterData }) => {
   const dispatch = useDispatch()
   const dateType = useSelector(state => state.status.type)
-  const highLightPointKey = useSelector(state=> 
+  const highLightPointKey = useSelector(state =>
     state.status.mode === MODE_MAPPING.NORMAL
       ? state.data.singleHighlight
       : -1
@@ -30,8 +30,8 @@ const Scatterplot = ({nycScatterData, sfScatterData}) => {
   let nycRank = buildData(nycScatterData)
   let sfRank = buildData(sfScatterData)
   let singleHighlightPoint = [
-    ...nycScatterData.filter(d=>d.key === highLightPointKey),
-    ...sfScatterData.filter(d=>d.key === highLightPointKey),
+    ...nycScatterData.filter(d => d.key === highLightPointKey),
+    ...sfScatterData.filter(d => d.key === highLightPointKey),
   ]
   let singleHightlightCoordinate = buildData(singleHighlightPoint)
 
@@ -55,7 +55,7 @@ const Scatterplot = ({nycScatterData, sfScatterData}) => {
     mode: 'markers',
     opacity: 1,
     marker: {
-      size: 10, 
+      size: 10,
       color: highLightPointKey >= 96 ? 'blue' : 'red',
       line: { width: 2 }
     },
@@ -75,26 +75,27 @@ const Scatterplot = ({nycScatterData, sfScatterData}) => {
     dragmode: 'select',
     showlegend: false,
     hovermode: false,
-    margin: { l: 20, r: 10, b: 20, t: 20, }
+    yaxis: { range: [0, 3.5] },
+    margin: { l: 20, r: 10, b: 40, t: 20, }
   }
 
   const onSelectedHandler = data => {
-    if(!data) return
-    if(!data.points.length){
+    if (!data) return
+    if (!data.points.length) {
       dispatch(setHighlight({ nycHighlight: [], sfHighlight: [] }))
     }
     let nycHighlight = []
     let sfHighlight = []
     let lastIndex = data.points.length - 1
 
-    if(data.points[0].data.name === 'nyc'){
+    if (data.points[0].data.name === 'nyc') {
       nycHighlight = data.points[0].data.selectedpoints
-      if(data.points[lastIndex].data.name === 'sf'){
+      if (data.points[lastIndex].data.name === 'sf') {
         sfHighlight = data.points[lastIndex].data.selectedpoints
       }
     } else {
       sfHighlight = data.points[0].data.selectedpoints
-      if(data.points[lastIndex].data.name === 'nyc'){
+      if (data.points[lastIndex].data.name === 'nyc') {
         nycHighlight = data.points[lastIndex].data.selectedpoints
       }
     }
@@ -106,13 +107,22 @@ const Scatterplot = ({nycScatterData, sfScatterData}) => {
     dispatch(setMode(MODE_MAPPING.NORMAL))
   }
   return (
-    <Plot
-      data={data}
-      layout={layout}
-      config={config}
-      onSelected={data => onSelectedHandler(data)}
-      onDeselect={() => onDeselectHandler()}
-    />
+    <React.Fragment>
+      <div style={{ textAlign: 'center' }}>Rank</div>
+      <Plot
+        data={data}
+        layout={{
+          ...layout,
+          xaxis: {
+            ...AXES_BY_MODE_MAPPING[dateType].scatterChart
+          }
+        }}
+        config={config}
+        onSelected={data => onSelectedHandler(data)}
+        onDeselect={() => onDeselectHandler()}
+      />
+    </React.Fragment>
+
   );
 }
 

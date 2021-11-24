@@ -5,8 +5,8 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 
-import { TIME_RANGE_MAPPING, DATE_MAPPING } from './constant'
-import { setType, setDate } from '../store/statusSlicer'
+import { TIME_RANGE_MAPPING, DATE_MAPPING, MODE_MAPPING } from './constant'
+import { setType, setDate, setMode } from '../store/statusSlicer'
 
 
 
@@ -23,6 +23,7 @@ const Banner = () => {
   const handleTimeFormatChange = newType => {
     if (newType === dateType || newType === null) return
     dispatch(setDate(0))
+    dispatch(setMode(MODE_MAPPING.NORMAL))
     setSliderDate(0)
     dispatch(setType(newType))
   }
