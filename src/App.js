@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import * as d3 from 'd3-fetch'
 import './App.css'
 
-import nycCSV from './data/flickr_nyc.csv'
-import sfCSV from './data/flickr_sf.csv'
+import nycCSV from './data/test.csv'
+import sfCSV from './data/test.csv'
 import feature_nyc from './data/feature_nyc.json'
 import feature_sf from './data/feature_sf.json'
 import Map from './components/Map'
@@ -25,13 +25,13 @@ function App() {
       latLng: [d.latLng[0][1], d.latLng[0][0]],
       location: 'nyc',
       key: i
-    }))
+    })).filter(d=>d.resolutions)
     sfScatterData = feature_sf.features.map((d, i) => ({
       ...d,
       latLng: [d.latLng[0][1], d.latLng[0][0]],
       location: 'sf',
       key: i + feature_nyc.features.length
-    }))
+    })).filter(d=>d.resolutions)
     Promise.all([
       d3.csv(nycCSV, d => [+d.Longtitude, +d.Latitude, +d.Time]),
       d3.csv(sfCSV, d => [+d.Longtitude, +d.Latitude, +d.Time])

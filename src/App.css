@@ -70,3 +70,7 @@ html, body {
 .MuiSlider-markLabel {
   top: 20px !important;
 }
+
+.nsewdrag.drag.cursor-ew-resize{
+  cursor: crosshair !important ;
+}
