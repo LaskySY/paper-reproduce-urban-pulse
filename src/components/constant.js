@@ -14,12 +14,13 @@ export const INITIAL_LOCATION = {
 
 export const MODE_MAPPING = {
   NORMAL: 'normal',
-  SELECT: 'select'
+  SELECT: 'select',
+  LOCATION: 'location'
 }
 
 export const DATETYPE_MAPPING = {
   HOUR: 'HOUR',
-  DOW: "DAYOFWEEK",
+  DAYOFWEEK: "DAYOFWEEK",
   MONTH: "MONTH"
 }
 
@@ -53,4 +54,11 @@ export const DATE_MAPPING = {
   HOUR: [...Array(24).keys()],
   DAYOFWEEK: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   MONTH: ['Jan', 'Fen', "Mar", 'Apr', 'May', 'Jun', 'Jul', 'Aug', "Sep", "Oct", 'Nov', 'Dec']
+}
+
+export const LOCATION_KEY_MAPPING = {
+  'Rockefeller Center': { key: [2], city: 'nyc', name: 'Rockefeller Center' },
+  'Greenwich Village': { key: [16, 17, 25, 60, 61, 72, 81], city: 'nyc', name: 'Greenwich Village' },
+  'Alcatraz Island': { key: [3], city: 'sf', name: 'Alcatraz Island' },
+  'Western Addition': { key: [8, 19, 46, 75, 85, 88], city: 'sf', name: 'Western Addition' }
 }

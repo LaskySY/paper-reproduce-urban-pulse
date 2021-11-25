@@ -9,6 +9,7 @@ import { setHighlight } from '../store/dataSlicer'
 
 const Scatterplot = ({ nycScatterData, sfScatterData }) => {
   const dispatch = useDispatch()
+  const mode = useSelector(state=> state.status.mode)
   const dateType = useSelector(state => state.status.type)
   const highLightPointKey = useSelector(state =>
     state.status.mode === MODE_MAPPING.NORMAL
@@ -107,6 +108,7 @@ const Scatterplot = ({ nycScatterData, sfScatterData }) => {
     dispatch(setMode(MODE_MAPPING.NORMAL))
   }
   return (
+    mode != MODE_MAPPING.LOCATION &&
     <React.Fragment>
       <div style={{ textAlign: 'center' }}>Rank</div>
       <Plot

@@ -61,7 +61,7 @@ const DistanceChart = ({ nycScatterData, sfScatterData }) => {
   const [hover, setHover] = useState(false)
   var distanceList = []
   var keyValueList = []
-
+  
 
 
   useEffect(() => {
@@ -77,10 +77,7 @@ const DistanceChart = ({ nycScatterData, sfScatterData }) => {
     var sourceData = nycScatterData
     var sourcePoint = sfScatterData.filter(d => d.key === highlight)[0]
   }
-
-  console.log(singleHighlight, location)
-
-  if (mode === MODE_MAPPING.SELECT) {
+  if (mode != MODE_MAPPING.NORMAL) {
     sourceData = highlightIndex.map(d => sourceData[d])
   }
 
@@ -98,10 +95,9 @@ const DistanceChart = ({ nycScatterData, sfScatterData }) => {
 
   const handleUnhover = data => {
     if(data.points[0].curveNumber === 0 ) return;
-    setHover(false)
     dispatch(setSingleHighlight(-1))
+    setHover(false)
   }
-
 
   const data = [{
     x: [0],
@@ -123,6 +119,7 @@ const DistanceChart = ({ nycScatterData, sfScatterData }) => {
   }]
 
   return (
+    mode != MODE_MAPPING.LOCATION &&
     <React.Fragment>
       <div style={{ textAlign: 'center' }}>Distance</div>
       <Plot

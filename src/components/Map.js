@@ -12,7 +12,7 @@ const getTime = (unixTimestamp, dateType) => {
   switch (dateType) {
     case DATETYPE_MAPPING.HOUR:
       return date.getHours()
-    case DATETYPE_MAPPING.DOW:
+    case DATETYPE_MAPPING.DAYOFWEEK:
       return date.getDay()
     case DATETYPE_MAPPING.MONTH:
       return date.getMonth()
@@ -43,7 +43,7 @@ const Map = ({ location, scalarData, scatterData}) => {
     }),
     new ScatterplotLayer({
       id: 'scatterplot-layer',
-      data: status.mode === MODE_MAPPING.SELECT 
+      data: status.mode != MODE_MAPPING.NORMAL 
         ? highLightList.map(i=>scatterData[i])
         : scatterData.map(d=>d),
       pickable: true,

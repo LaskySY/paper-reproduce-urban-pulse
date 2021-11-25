@@ -66,7 +66,7 @@ const PulseChart = ({ nycScatterData, sfScatterData }) => {
     setRankIndex([])
   }, [dateType])
 
-  if (mode === MODE_MAPPING.SELECT) {
+  if (mode != MODE_MAPPING.NORMAL) {
     nycScatterData = nycHighlight.map(d => nycScatterData[d])
     sfScatterData = sfHighlight.map(d => sfScatterData[d])
   }

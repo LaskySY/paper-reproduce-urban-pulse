@@ -37,7 +37,6 @@ html, body {
   right: 0;
   height: 125px;
   width: calc(65% - 300px);
-  background-color: lightskyblue;
 }
 .distance_container {
   position: fixed;

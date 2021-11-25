@@ -12,6 +12,7 @@ import { setType, setDate, setMode } from '../store/statusSlicer'
 
 const Banner = () => {
   const dispatch = useDispatch()
+  const mode = useSelector(state => state.status.mode)
   const dateType = useSelector(state => state.status.type)
   const date = useSelector(state => state.status.date)
   const [sliderDate, setSliderDate] = useState(date)
@@ -23,7 +24,7 @@ const Banner = () => {
   const handleTimeFormatChange = newType => {
     if (newType === dateType || newType === null) return
     dispatch(setDate(0))
-    dispatch(setMode(MODE_MAPPING.NORMAL))
+    if(mode === MODE_MAPPING.SELECT) dispatch(setMode(MODE_MAPPING.NORMAL))
     setSliderDate(0)
     dispatch(setType(newType))
   }
