@@ -23,3 +23,9 @@ http://vgc.poly.edu/projects/urban-pulse/vis.html?data1=../../files/urban-pulse/
 ## About Class
 
 2021 Fall CS-GY 6313/CUSP-GX 6006 Information Visualization
+
+## How to use it
+
+1. yarn install
+
+2. yarn start
